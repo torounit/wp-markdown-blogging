@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Codemirror from 'react-codemirror'
-import { editContent } from '../actions/editor'
+import { editTitle, editContent } from '../actions/editor'
 
 require('codemirror/mode/markdown/markdown');
 
@@ -13,23 +13,28 @@ const options = {
 	matchBrackets: true
 }
 
-const PostForm = ({ content = "", onChange } ) => (
+const PostForm = ({ title = '', content = '', onChangeTitle , onChangeContent } ) => (
 	<div>
-		<Codemirror value={content} onChange={onChange} options={options} />
+		<input type="text" defaultValue={title} onChange={onChangeTitle} />
+		<Codemirror value={content} onChange={onChangeContent} options={options} />
 	</div>
 );
 
 
 const mapStateToProps = (state) => {
 	return {
+		title: state.editor.title,
 		content: state.editor.content
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onChange: (content) => {
-			dispatch(editContent(content));
+		onChangeTitle:(event) => {
+			dispatch( editTitle(event.target.value) )
+		},
+		onChangeContent:(content) => {
+			dispatch(editContent(content))
 		}
 	}
 }

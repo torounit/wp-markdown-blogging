@@ -3,18 +3,19 @@ import { connect } from 'react-redux'
 import { addPost, editPost } from '../actions/post'
 
 
-const SavePostButton = ({ content, onAddPost, onUpdatePost, id }) => (
+const SavePostButton = ({ title, content, onAddPost, onUpdatePost, id }) => (
 	<button
 		type="submit"
 		onClick={
-			() => id ? onUpdatePost({ title: 'hoge', id, content }) : onAddPost({ title: 'hoge', content })
+			() => id ? onUpdatePost({ title, id, content }) : onAddPost({ title, content })
 		}
-	>Save Post</button>
+	>{ id ? 'Update Post' : 'Add Post' }</button>
 );
 
 
 const mapStateToProps = (state) => {
 	return {
+		title: state.editor.title,
 		content: state.editor.content,
 		id: state.editor.id
 	}
