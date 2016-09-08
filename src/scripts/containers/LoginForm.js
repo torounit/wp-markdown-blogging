@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { doLogin, doLogout } from '../actions/login'
+import { Button, Input } from 'rebass'
 
-const LoginForm = ({ loggedIn , onSubmitLogin, onSubmitLogout } ) => {
+const LoginForm = ({ loggedIn , onSubmitLogin, onSubmitLogout, error } ) => {
 	let username, password;
 	if ( loggedIn ) {
 		return (
@@ -11,9 +12,7 @@ const LoginForm = ({ loggedIn , onSubmitLogin, onSubmitLogout } ) => {
 					e.preventDefault()
 					onSubmitLogout()
 				}}>
-					<button type="submit">
-						Logout
-					</button>
+					<Button type="submit">Logout</Button>
 				</form>
 			</div>
 		);
@@ -22,13 +21,12 @@ const LoginForm = ({ loggedIn , onSubmitLogin, onSubmitLogout } ) => {
 		<div>
 			<form onSubmit={e => {
 				e.preventDefault()
-				onSubmitLogin(username.value,password.value)
+				onSubmitLogin(username.value, password.value)
 			}}>
-				<input id="username" ref={ node => { username = node }} />
-				<input id="password" ref={ node => { password = node }} />
-				<button type="submit">
-					Login
-				</button>
+				<Input label="Username" id="username" name="username" baseRef={ node => { username = node }} />
+				<Input label="Password" id="password" name="password" baseRef={ node => { password = node }} />
+				<Button type="submit">Login</Button>
+				<p>{ error ? 'Login Failed' : ''}</p>
 			</form>
 		</div>
 	);
@@ -37,6 +35,7 @@ const LoginForm = ({ loggedIn , onSubmitLogin, onSubmitLogout } ) => {
 
 const mapStateToProps = (state) => {
 	return {
+		error: state.auth.error,
 		loggedIn: state.auth.loggedIn
 	}
 }

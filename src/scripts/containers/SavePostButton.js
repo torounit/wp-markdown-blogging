@@ -1,15 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addPost, editPost } from '../actions/post'
-
+import { Button } from 'rebass'
 
 const SavePostButton = ({ title, content, onAddPost, onUpdatePost, id }) => (
-	<button
+	<Button
 		type="submit"
 		onClick={
 			() => id ? onUpdatePost({ title, id, content }) : onAddPost({ title, content })
 		}
-	>{ id ? 'Update Post' : 'Add Post' }</button>
+	>{ id ? 'Update Post' : 'Add Post' }</Button>
 );
 
 
