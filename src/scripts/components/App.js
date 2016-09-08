@@ -16,17 +16,20 @@ const App = () => (
 			</Panel>
 		</LoginOverlay>
 
-		<TitleForm />
-		<Flex align="stretch">
-			<Box auto>
-				<PostForm />
-			</Box>
-			<Box auto>
-				<PostPreview />
-			</Box>
+		<Flex column align="stretch" style={{height:'100vh'}}>
+			<TitleForm />
+			<Flex align="stretch" style={{flex: '1 1 auto'}}>
+				<div style={{flex: '1 1 auto'}}>
+					<PostForm />
+				</div>
+				<div style={{flex: '1 1 auto'}}>
+					<PostPreview />
+				</div>
+			</Flex>
+
+			<SavePostButton />
 		</Flex>
 
-		<SavePostButton />
 	</div>
 
 );

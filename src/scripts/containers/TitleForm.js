@@ -7,7 +7,16 @@ import { Button, Input } from 'rebass'
 
 const TitleForm = ({ title = '', onChangeTitle } ) => (
 	<div>
-		<Input label="" name="title" defaultValue={title} onChange={onChangeTitle} />
+		<input
+			label=""
+			name="title"
+			defaultValue={title}
+			onChange={onChangeTitle}
+			style={{
+				fontSize: '2em',
+				width: '100%',
+			}}
+		/>
 	</div>
 );
 
