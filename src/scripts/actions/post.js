@@ -1,22 +1,25 @@
 "use strict";
-import WP from '../../../node_modules/wpapi/browser/wpapi';
-
-
-//Actions
-export const VIEW_POST = 'VIEW_POST'
-
-export const viewPost = (  id ) => {
-	return {
-		type: VIEW_POST,
-		id
-	}
-}
 
 export const ADD_POST = 'ADD_POST'
+
 export const addPost = ( title, content ) => {
+
 	return {
 		type: ADD_POST,
 		title,
 		content
 	}
+
+}
+
+export const EDIT_POST = 'EDIT_POST';
+export const editPost = ( id, title, content ) => {
+
+	return {
+		type: ADD_POST,
+		id,
+		title,
+		content
+	}
+
 }
