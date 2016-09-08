@@ -2,11 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import marked from 'marked'
 
-const options = {
-	lineNumbers: true,
-	mode: 'markdown'
-}
-
 const createMarkup = ( content ) => {
 	return { __html: content }
 };
