@@ -18,16 +18,31 @@ const App = () => (
 
 		<Flex column align="stretch" style={{height:'100vh'}}>
 			<TitleForm />
-			<Flex align="stretch" style={{flex: '1 1 auto'}}>
-				<div style={{flex: '1 1 auto'}}>
+			<Flex
+				align="stretch"
+				style={{
+					flex: '1 1 auto'
+				}}>
+				<div style={{
+					width: '50%',
+					background: '#f5f5f5',
+					padding: '16px'
+				}}>
 					<PostForm />
 				</div>
-				<div style={{flex: '1 1 auto'}}>
+				<div style={{
+					width: '50%',
+					background: '#fff',
+					padding: '16px'
+				}}>
 					<PostPreview />
 				</div>
 			</Flex>
-
-			<SavePostButton />
+			<div style={{
+				padding: '16px'
+			}}>
+				<SavePostButton />
+			</div>
 		</Flex>
 
 	</div>

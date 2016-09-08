@@ -5,6 +5,7 @@ import { Button } from 'rebass'
 
 const SavePostButton = ({ title, content, onAddPost, onUpdatePost, id }) => (
 	<Button
+		big
 		type="submit"
 		onClick={
 			() => id ? onUpdatePost({ title, id, content }) : onAddPost({ title, content })

@@ -15,6 +15,8 @@ const TitleForm = ({ title = '', onChangeTitle } ) => (
 			style={{
 				fontSize: '2em',
 				width: '100%',
+				padding: '0 16px',
+				outline: 'none'
 			}}
 		/>
 	</div>
