@@ -1,18 +1,25 @@
 import WP from '../../../node_modules/wpapi/browser/wpapi';
-import { LOGGED_IN } from '../actions/login'
-import { ADD_POST,EDIT_POST } from '../actions/post'
-
+import {LOGGED_IN} from '../actions/login'
+import {ADD_POST, EDIT_POST} from '../actions/post'
 export const login = store => next => action => {
 
-	if( action.type == LOGGED_IN ) {
-		let { username, password } = action;
+	if (action.type == LOGGED_IN) {
+		let {username, password} = action;
 		let wp = new WP({
 			endpoint: 'http://vccw.loc/wp-json',
 			username,
-			password
+			password,
+			auth: true
 		});
 
-		return wp.users('me').then( () => next( Object.assign({}, action, { loggedIn: true }) ));
+		wp.users().me().then(() => {
+			return next(Object.assign({}, action, {loggedIn: true, error: false}))
+		}).catch((err) => {
+			if (err.message !== "Unauthorized" && err.crossDomain ) {
+				return next(Object.assign({}, action, {loggedIn: true, error: false}))
+			}
+			return next(Object.assign({}, action, {loggedIn: false, error: true}))
+		})
 	}
 
 	return next(action);
@@ -20,31 +27,32 @@ export const login = store => next => action => {
 
 export const post = store => next => action => {
 	let state = store.getState();
-	let { username, password } = state.auth;
+	let {username, password} = state.auth;
 	let wp = new WP({
 		endpoint: 'http://vccw.loc/wp-json',
 		username,
-		password
+		password,
+		auth: true
 	});
 
-	if( action.type == ADD_POST ) {
-		let { title, content } = action;
+	if (action.type == ADD_POST) {
+		let {title, content} = action;
 		return wp.posts().create({
 			title,
 			content,
 			status: 'publish'
-		}).then( ( data ) => next({
+		}).then((data) => next({
 			type: ADD_POST,
 			data
-		})).catch( ( data ) => console.log(data) );
+		})).catch((data) => console.log(data));
 	}
-	else if( action.type == EDIT_POST ) {
-		let { content, title, id } = action;
-		return wp.posts().id( id ).update({
+	else if (action.type == EDIT_POST) {
+		let {content, title, id} = action;
+		return wp.posts().id(id).update({
 			title,
 			content,
 			status: 'publish'
-		}).then( ( data ) => next({
+		}).then((data) => next({
 			type: EDIT_POST,
 			data,
 			id

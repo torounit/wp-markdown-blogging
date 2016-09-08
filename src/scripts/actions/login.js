@@ -2,7 +2,6 @@
 import WP from '../../../node_modules/wpapi/browser/wpapi';
 
 export const LOGGED_IN = 'LOGGED_IN'
-
 export const doLogin = ( username, password ) => {
 
 	return {
