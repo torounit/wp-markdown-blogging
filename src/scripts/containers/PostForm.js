@@ -15,7 +15,7 @@ const options = {
 
 const PostForm = ({ content = "", onChange } ) => (
 	<div>
-		<Codemirror value={content} onChange={ () => onChange(content) } options={options} />
+		<Codemirror value={content} onChange={onChange} options={options} />
 	</div>
 );
 
