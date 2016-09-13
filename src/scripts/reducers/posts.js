@@ -12,15 +12,12 @@ const post = (state = {}, action) => {
 }
 
 const posts = (state = [], action) => {
-
+	let { posts, data } = action;
 	switch (action.type) {
-
 		case RECEIVE_POSTS :
-			let {posts} = action;
 			return posts;
 
 		case ADD_POST:
-			let {data} = action;
 			return [
 				data,
 				...state
@@ -28,9 +25,7 @@ const posts = (state = [], action) => {
 
 		case EDIT_POST:
 			return state.map( p =>
-				p.id === action.id ?
-					Object.assign({}, p, data) :
-					p
+				p.id === action.id ? Object.assign({}, p, data) : p
 			)
 		default:
 			return state
