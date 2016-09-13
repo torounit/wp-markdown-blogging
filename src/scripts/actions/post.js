@@ -23,3 +23,11 @@ export const editPost = ( { id, title, content } ) => {
 	}
 
 }
+
+export const SELECT_POST = 'SELECT_POST';
+export const selectPost = ( id ) => {
+	return {
+		type: SELECT_POST,
+		id
+	}
+}

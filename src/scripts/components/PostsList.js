@@ -7,6 +7,7 @@ const Posts = ({ posts, onPostClick }) => (
 			{ posts.map( (post) =>
 				<li
 					key={post.id}
+					onClick={ () => onPostClick(post.id) }
 				>
 					<div className="center">{post.title.rendered}</div>
 				</li>

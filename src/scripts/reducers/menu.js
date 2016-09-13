@@ -1,6 +1,7 @@
 import {OPEN_MENU,CLOSE_MENU} from "../actions/menu";
+import {TOGGLE_MENU} from "../actions/menu";
 const menu = (state = {
-	isOpen: true
+	isOpen: false
 }, action) => {
 
 	switch (action.type) {
@@ -13,6 +14,11 @@ const menu = (state = {
 		case CLOSE_MENU:
 			return {
 				isOpen: false
+			}
+
+		case TOGGLE_MENU:
+			return {
+				isOpen: !state.isOpen
 			}
 
 

@@ -1,6 +1,7 @@
 import { EDIT_CONTENT } from '../actions/editor';
 import {ADD_POST} from "../actions/post";
 import {EDIT_TITLE} from "../actions/editor";
+import {SELECT_POST} from "../actions/post";
 
 
 const editor = (state = {
@@ -23,7 +24,9 @@ const editor = (state = {
 			let { title } = action;
 			return Object.assign({}, state, { title });
 
-
+		case SELECT_POST:
+			//let { title, id, content } = action;
+			return action
 		default:
 			return state
 	}

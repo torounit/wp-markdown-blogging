@@ -5,8 +5,12 @@ import PostPreview from '../containers/PostPreview'
 import LoginForm from '../containers/LoginForm'
 import SavePostButton from '../containers/SavePostButton'
 import TitleForm from '../containers/TitleForm'
+import MenuButton from '../containers/MenuButton'
+import SideMenu from '../containers/SideMenu'
+
 import { Panel } from 'rebass'
-import { Flex, Box } from 'reflexbox'
+import { Flex } from 'reflexbox'
+import Icon from 'react-geomicons'
 
 const App = () => (
 	<div>
@@ -15,6 +19,7 @@ const App = () => (
 				<LoginForm />
 			</Panel>
 		</LoginOverlay>
+		<SideMenu />
 
 		<Flex column align="stretch" style={{height:'100vh'}}>
 			<TitleForm />
@@ -38,12 +43,23 @@ const App = () => (
 					<PostPreview />
 				</div>
 			</Flex>
-			<div style={{
-				padding: '16px'
-			}}>
-				<SavePostButton />
-			</div>
+			<Flex
+				justify='flex-end'
+				style={{
+					padding: '16px'
+				}}
+			>
+				<SavePostButton/>
+			</Flex>
 		</Flex>
+		<div style={{
+			position: 'fixed',
+			bottom: '16px',
+			left: '16px',
+			zIndex: 10
+		}}>
+			<MenuButton />
+		</div>
 
 	</div>
 

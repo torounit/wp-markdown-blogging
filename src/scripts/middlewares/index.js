@@ -1,6 +1,6 @@
 import WP from '../../../node_modules/wpapi/browser/wpapi';
 import {LOGGED_IN} from '../actions/login'
-import {ADD_POST, EDIT_POST} from '../actions/post'
+import {ADD_POST, EDIT_POST, SELECT_POST} from '../actions/post'
 export const login = store => next => action => {
 
 	if (action.type == LOGGED_IN) {
@@ -56,6 +56,15 @@ export const post = store => next => action => {
 			type: EDIT_POST,
 			data,
 			id
+		}))
+	}else if( action.type == SELECT_POST ) {
+		let { id } = action;
+		console.log(id);
+
+		return wp.posts().id(id).then((data) => next({
+			type: SELECT_POST,
+			title: data.title.rendered,
+			content: data.content.rendered
 		}))
 	}
 

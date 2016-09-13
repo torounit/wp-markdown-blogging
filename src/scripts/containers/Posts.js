@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { viewPost } from '../actions/post';
+import { selectPost } from '../actions/post';
 import PostsList from '../components/PostsList'
 
 
@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onPostClick: (id) => {
-			dispatch(viewPost(id));
+			dispatch(selectPost(id));
 		}
 	}
 }
