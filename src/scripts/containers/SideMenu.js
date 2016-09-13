@@ -1,12 +1,11 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { Drawer } from 'rebass'
-import { toggleMenu } from "../actions/menu";
+import {connect} from 'react-redux'
+import {Drawer} from 'rebass'
 import {closeMenu} from "../actions/menu";
 import Posts from './Posts'
 
 
-const SideMenu = ({ isOpen,onDismiss }) => (
+const SideMenu = ({isOpen, onDismiss}) => (
 
 	<Drawer open={isOpen} onDismiss={onDismiss}>
 		<Posts></Posts>
