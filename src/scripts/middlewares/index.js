@@ -63,6 +63,7 @@ export const post = store => next => action => {
 
 		return wp.posts().id(id).then((data) => next({
 			type: SELECT_POST,
+			id: id,
 			title: data.title.rendered,
 			content: data.content.rendered
 		}))

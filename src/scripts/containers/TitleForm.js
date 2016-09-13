@@ -5,7 +5,7 @@ import { editTitle } from '../actions/editor'
 import { Button, Input } from 'rebass'
 
 
-const TitleForm = ({ title = '', onChangeTitle } ) => (
+const TitleForm = ({ title, onChangeTitle } ) => (
 	<div>
 		<input
 			label=""
