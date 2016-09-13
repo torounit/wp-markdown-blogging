@@ -1,3 +1,4 @@
+"use strict";
 import WP from '../../../node_modules/wpapi/browser/wpapi';
 import {LOGGED_IN} from '../actions/login'
 import {ADD_POST, EDIT_POST, SELECT_POST} from '../actions/post'
@@ -22,15 +23,15 @@ export const login = store => next => action => {
 		});
 
 		wp.users().me().then(() => {
+
 			let result = next(Object.assign({}, action, { type: LOGGED_IN,loggedIn: true, error: false}));
 			store.dispatch(fetchPosts())
-			next(fetchPosts());
 			return result;
+
 		}).catch((err) => {
 			if (err.message !== "Unauthorized" && err.crossDomain ) {
 				let result = next(Object.assign({}, action, { type: LOGGED_IN,loggedIn: true, error: false}));
 				store.dispatch(fetchPosts())
-				next(fetchPosts());
 				return result;
 			}
 			return next(Object.assign({}, action, { type: LOGGED_IN,loggedIn: false, error: true }))
@@ -38,15 +39,9 @@ export const login = store => next => action => {
 
 	}
 
-
 }
 
 export const posts = store => next => action => {
-	"use strict";
-	console.log(action);
-	console.log('dispatching', action)
-
-
 	let state = store.getState();
 	let {username, password} = state.auth;
 	let wp = new WP({
