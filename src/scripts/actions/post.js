@@ -31,3 +31,10 @@ export const selectPost = ( id ) => {
 		id
 	}
 }
+
+export const NEW_POST = 'NEW_POST';
+export const newPost = () => {
+	return {
+		type: NEW_POST
+	}
+}
