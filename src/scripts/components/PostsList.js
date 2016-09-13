@@ -1,18 +1,23 @@
 import React  from 'react'
+import { Divider } from 'rebass';
 const PropTypes = React.PropTypes;
 
 const Posts = ({ posts, onPostClick }) => (
 	<div>
-		<ol>
+		<div>
 			{ posts.map( (post) =>
-				<li
+				<div
 					key={post.id}
 					onClick={ () => onPostClick(post.id) }
+					style={{
+						padding: '8px',
+						borderBottom: '1px solid #CCC'
+					}}
 				>
 					<div className="center">{post.title.rendered}</div>
-				</li>
+				</div>
 			) }
-		</ol>
+		</div>
 	</div>
 )
 

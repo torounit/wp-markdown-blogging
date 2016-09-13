@@ -7,7 +7,7 @@ import Posts from './Posts'
 
 const SideMenu = ({isOpen, onDismiss}) => (
 
-	<Drawer open={isOpen} onDismiss={onDismiss}>
+	<Drawer open={isOpen} onDismiss={onDismiss} size={240}>
 		<Posts></Posts>
 	</Drawer>
 
