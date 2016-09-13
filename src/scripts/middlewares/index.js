@@ -1,9 +1,18 @@
 import WP from '../../../node_modules/wpapi/browser/wpapi';
 import {LOGGED_IN} from '../actions/login'
 import {ADD_POST, EDIT_POST, SELECT_POST} from '../actions/post'
+import {REQUEST_POSTS} from "../actions/posts";
+import {RECEIVE_POSTS} from "../actions/posts";
+import {fetchPosts} from "../actions/posts";
+import {DO_LOGGIN} from "../actions/login";
+
 export const login = store => next => action => {
 
-	if (action.type == LOGGED_IN) {
+	if (action.type != DO_LOGGIN) {
+			return next(action);
+	}
+
+	if (action.type == DO_LOGGIN) {
 		let {username, password} = action;
 		let wp = new WP({
 			endpoint: 'http://vccw.loc/wp-json',
@@ -13,15 +22,50 @@ export const login = store => next => action => {
 		});
 
 		wp.users().me().then(() => {
-			return next(Object.assign({}, action, {loggedIn: true, error: false}))
+			let result = next(Object.assign({}, action, { type: LOGGED_IN,loggedIn: true, error: false}));
+			store.dispatch(fetchPosts())
+			next(fetchPosts());
+			return result;
 		}).catch((err) => {
 			if (err.message !== "Unauthorized" && err.crossDomain ) {
-				return next(Object.assign({}, action, {loggedIn: true, error: false}))
+				let result = next(Object.assign({}, action, { type: LOGGED_IN,loggedIn: true, error: false}));
+				store.dispatch(fetchPosts())
+				next(fetchPosts());
+				return result;
 			}
-			return next(Object.assign({}, action, {loggedIn: false, error: true}))
+			return next(Object.assign({}, action, { type: LOGGED_IN,loggedIn: false, error: true }))
 		})
+
 	}
 
+
+}
+
+export const posts = store => next => action => {
+	"use strict";
+	console.log(action);
+	console.log('dispatching', action)
+
+
+	let state = store.getState();
+	let {username, password} = state.auth;
+	let wp = new WP({
+		endpoint: 'http://vccw.loc/wp-json',
+		username,
+		password,
+		auth: true
+	});
+
+	if(action.type == REQUEST_POSTS) {
+		return wp.posts().then((posts) => {
+			return next({
+				type: RECEIVE_POSTS,
+				posts,
+				filter:action.filter,
+				receivedAt: Date.now()
+			})
+		})
+	}
 	return next(action);
 }
 
@@ -59,7 +103,6 @@ export const post = store => next => action => {
 		}))
 	}else if( action.type == SELECT_POST ) {
 		let { id } = action;
-		console.log(id);
 
 		return wp.posts().id(id).then((data) => next({
 			type: SELECT_POST,

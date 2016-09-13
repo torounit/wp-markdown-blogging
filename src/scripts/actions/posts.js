@@ -23,13 +23,9 @@ export const receivePosts = ( filter = {} , posts  ) => {
 }
 
 export const fetchPosts = ( filter = {} ) => {
-
-	return ( dispatch ) => {
-
-		dispatch(requestPosts(filter));
-
-		return wp.posts().then(function( data ) {
-			dispatch(receivePosts(filter, data));
-		})
+	return {
+		type: REQUEST_POSTS,
+		filter
 	}
+
 }
