@@ -14,7 +14,7 @@ const Posts = ({ posts, onPostClick }) => (
 						borderBottom: '1px solid #CCC'
 					}}
 				>
-					<div className="center">{post.title.rendered}</div>
+					<div className="center">{post.title.raw}</div>
 				</div>
 			) }
 		</div>

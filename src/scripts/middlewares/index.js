@@ -52,7 +52,7 @@ export const posts = store => next => action => {
 	});
 
 	if(action.type == REQUEST_POSTS) {
-		return wp.posts().then((posts) => {
+		return wp.posts().edit().then((posts) => {
 			return next({
 				type: RECEIVE_POSTS,
 				posts,
@@ -99,11 +99,11 @@ export const post = store => next => action => {
 	}else if( action.type == SELECT_POST ) {
 		let { id } = action;
 
-		return wp.posts().id(id).then((data) => next({
+		return wp.posts().id(id).edit().then((data) => next({
 			type: SELECT_POST,
 			id: id,
-			title: data.title.rendered,
-			content: data.content.rendered
+			title: data.title.raw,
+			content: data.content.raw
 		}))
 	}
 
