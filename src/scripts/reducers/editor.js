@@ -1,7 +1,6 @@
 import {EDIT_CONTENT} from '../actions/editor';
-import {ADD_POST} from "../actions/post";
 import {EDIT_TITLE} from "../actions/editor";
-import {SELECT_POST, NEW_POST} from "../actions/post";
+import {ADD_POST, SELECT_POST, NEW_POST} from "../actions/post";
 
 
 const editor = (state = {
