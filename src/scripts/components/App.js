@@ -27,6 +27,9 @@ const App = () => (
 			<Flex
 				align="center"
 				justify="space-between"
+				style={{
+					flex: '0 0 auto'
+				}}
 			>
 				<Box
 					auto
@@ -44,7 +47,8 @@ const App = () => (
 					flex: '1 1 auto',
 					borderWidth: '1px 0',
 					borderStyle: 'solid',
-					borderColor: '#ccc'
+					borderColor: '#ccc',
+					overflow: 'scroll'
 				}}>
 				<div style={{
 					width: '50%',
@@ -64,7 +68,8 @@ const App = () => (
 			<Flex
 				justify='flex-end'
 				style={{
-					padding: '16px'
+					padding: '16px',
+					flex: '0 0 auto',
 				}}
 			>
 				<SavePostButton/>
