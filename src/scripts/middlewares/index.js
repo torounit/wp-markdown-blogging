@@ -1,5 +1,6 @@
 "use strict";
-import WP from '../../../node_modules/wpapi/browser/wpapi';
+import {endpoint} from '../constants/wp'
+import WPAPI from '../../../node_modules/wpapi/browser/wpapi';
 import {LOGGED_IN} from '../actions/login'
 import {ADD_POST, EDIT_POST, SELECT_POST} from '../actions/post'
 import {REQUEST_POSTS} from "../actions/posts";
@@ -28,14 +29,14 @@ export const login = store => next => action => {
 	if (action.type == DO_LOGGIN) {
 
 		let {username, password} = action;
-		let wp = new WP({
-			endpoint: 'http://vccw.loc/wp-json',
+		let wpapi = new WPAPI({
+			endpoint: endpoint,
 			username,
 			password,
 			auth: true
 		});
 
-		wp.users().me().then(() => {
+		wpapi.users().me().then(() => {
 
 			let result = next(Object.assign({}, action, { type: LOGGED_IN,loggedIn: true, error: false}));
 			store.dispatch(fetchPosts())
@@ -62,15 +63,15 @@ export const login = store => next => action => {
 export const posts = store => next => action => {
 	let state = store.getState();
 	let {username, password} = state.auth;
-	let wp = new WP({
-		endpoint: 'http://vccw.loc/wp-json',
+	let wpapi = new WPAPI({
+		endpoint: endpoint,
 		username,
 		password,
 		auth: true
 	});
 
 	if(action.type == REQUEST_POSTS) {
-		return wp.posts().edit().then((posts) => {
+		return wpapi.posts().edit().then((posts) => {
 			return next({
 				type: RECEIVE_POSTS,
 				posts,
@@ -85,8 +86,8 @@ export const posts = store => next => action => {
 export const post = store => next => action => {
 	let state = store.getState();
 	let {username, password} = state.auth;
-	let wp = new WP({
-		endpoint: 'http://vccw.loc/wp-json',
+	let wpapi = new WPAPI({
+		endpoint: endpoint,
 		username,
 		password,
 		auth: true
@@ -94,7 +95,7 @@ export const post = store => next => action => {
 
 	if (action.type == ADD_POST) {
 		let {title, content} = action;
-		return wp.posts().create({
+		return wpapi.posts().create({
 			title,
 			content,
 			status: 'publish'
@@ -105,7 +106,7 @@ export const post = store => next => action => {
 	}
 	else if (action.type == EDIT_POST) {
 		let {content, title, id} = action;
-		return wp.posts().id(id).update({
+		return wpapi.posts().id(id).update({
 			title,
 			content,
 			status: 'publish'
@@ -117,7 +118,7 @@ export const post = store => next => action => {
 	}else if( action.type == SELECT_POST ) {
 		let { id } = action;
 
-		return wp.posts().id(id).edit().then((data) => next({
+		return wpapi.posts().id(id).edit().then((data) => next({
 			type: SELECT_POST,
 			id: id,
 			title: data.title.raw,
