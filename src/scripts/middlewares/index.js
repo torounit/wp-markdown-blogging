@@ -7,11 +7,24 @@ import {RECEIVE_POSTS} from "../actions/posts";
 import {fetchPosts} from "../actions/posts";
 import {DO_LOGGIN} from "../actions/login";
 import {saveState} from "../api/localStorage";
+import {LOGGED_OUT} from "../actions/login";
 
 export const login = store => next => action => {
+
+	if (action.type == LOGGED_OUT) {
+
+		saveState({
+			auth: {}
+		})
+		next(action);
+
+	}
+
+
 	if (action.type != DO_LOGGIN) {
 			return next(action);
 	}
+
 	if (action.type == DO_LOGGIN) {
 
 		let {username, password} = action;

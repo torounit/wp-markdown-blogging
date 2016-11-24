@@ -1,16 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Panel, ButtonCircle } from 'rebass'
 import {toggleMenu} from "../actions/menu";
+import HamburgerButton from '../components/HamburgerButton';
 
 
-const MenuButton = ({ onClick }) => (
 
-	<ButtonCircle size={48} type="button" onClick={onClick}>
-		<i className="fa fa-bars" aria-hidden="true"></i>
-	</ButtonCircle>
-
-);
 
 const mapStateToProps = (state) => {
 	return {
@@ -29,4 +23,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(MenuButton)
+)(HamburgerButton)

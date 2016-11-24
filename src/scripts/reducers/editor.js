@@ -2,12 +2,13 @@ import {EDIT_CONTENT} from '../actions/editor';
 import {EDIT_TITLE} from "../actions/editor";
 import {ADD_POST, SELECT_POST, NEW_POST} from "../actions/post";
 
-
-const editor = (state = {
+const initialState  = {
 	id: 0,
-	title: 'Empty Title',
+	title: '',
 	content: '# Heading\n\nSome **bold** and _italic_ text\nBy [Jed Watson](https://github.com/JedWatson)'
-}, action) => {
+};
+
+const editor = (state = initialState, action) => {
 
 	switch (action.type) {
 
@@ -24,11 +25,7 @@ const editor = (state = {
 			return Object.assign({}, state, {title});
 
 		case NEW_POST:
-			return {
-				id: 0,
-				title: 'Empty Title',
-				content: '# Heading\n\nSome **bold** and _italic_ text\nBy [Jed Watson](https://github.com/JedWatson)'
-			}
+			return initialState;
 
 		case SELECT_POST:
 			//let { title, id, content } = action;

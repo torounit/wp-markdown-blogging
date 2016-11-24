@@ -1,41 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { editTitle } from '../actions/editor'
-
-
-class TitleForm extends React.Component {
-
-	componentWillReceiveProps(nextProps) {
-		// if (this.props.title !== nextProps.title) {
-		// 	nextProps.load();
-		// }
-	}
-
-	render() {
-		let { title, onChangeTitle } = this.props;
-		return (
-			<div>
-				<input
-					label=""
-					type="input"
-					name="title"
-					value={title}
-					onChange={onChangeTitle}
-					style={{
-						fontSize: '2em',
-						width: '100%',
-						padding: '4px 16px',
-						outline: 'none'
-					}}
-				/>
-			</div>
-		);
-	}
-
-
-
-}
-
+import TitleInput from '../components/TitleInput'
 
 const mapStateToProps = (state) => {
 	return {
@@ -54,4 +20,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(TitleForm)
+)(TitleInput)

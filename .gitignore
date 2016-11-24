@@ -2,3 +2,4 @@ www/scripts/*.js
 www/styles/*.css
 www/index.html
 node_modules
+npm-debug.log.*

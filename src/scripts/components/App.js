@@ -7,9 +7,10 @@ import SavePostButton from '../containers/SavePostButton'
 import TitleForm from '../containers/TitleForm'
 import MenuButton from '../containers/MenuButton'
 import SideMenu from '../containers/SideMenu'
+import LogoutButton from '../containers/LogoutButton'
 
-import { Panel } from 'rebass'
-import { Flex } from 'reflexbox'
+import {Panel} from 'rebass'
+import {Flex, Box} from 'reflexbox'
 import Icon from 'react-geomicons'
 
 const App = () => (
@@ -21,12 +22,29 @@ const App = () => (
 		</LoginOverlay>
 		<SideMenu />
 
-		<Flex column align="stretch" style={{height:'100vh'}}>
-			<TitleForm />
+		<Flex column align="stretch" style={{height: '100vh'}}>
+
+			<Flex
+				align="center"
+				justify="space-between"
+			>
+				<Box
+					auto
+					px={1} py={2}
+				>
+					<TitleForm />
+				</Box>
+				<Box p={1}>
+					<LogoutButton />
+				</Box>
+			</Flex>
 			<Flex
 				align="stretch"
 				style={{
-					flex: '1 1 auto'
+					flex: '1 1 auto',
+					borderWidth: '1px 0',
+					borderStyle: 'solid',
+					borderColor: '#ccc'
 				}}>
 				<div style={{
 					width: '50%',
@@ -64,7 +82,6 @@ const App = () => (
 	</div>
 
 );
-
 
 
 export default App

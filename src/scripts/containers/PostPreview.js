@@ -1,15 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import marked from 'marked'
-
-const createMarkup = ( content ) => {
-	return { __html: content }
-};
-
-const PostPreview = ({ content = "" } ) => (
-	<div dangerouslySetInnerHTML={createMarkup(content)} />
-);
-
+import MarkupPreview from '../components/MarkupPreview'
 
 const mapStateToProps = (state) => {
 	return {
@@ -20,4 +12,4 @@ const mapStateToProps = (state) => {
 
 export default connect(
 	mapStateToProps
-)(PostPreview)
+)(MarkupPreview)
