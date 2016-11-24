@@ -1,6 +1,4 @@
 "use strict";
-import WP from '../../../node_modules/wpapi/browser/wpapi';
-
 export const DO_LOGGIN = 'DO_LOGGIN'
 export const LOGGED_IN = 'LOGGED_IN'
 export const doLogin = ( username, password ) => {

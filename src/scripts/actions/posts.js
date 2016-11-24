@@ -1,6 +1,4 @@
 "use strict";
-import WP from '../../../node_modules/wpapi/browser/wpapi';
-const wp = new WP({ endpoint: 'http://vccw.loc/wp-json' });
 
 //Actions
 export const REQUEST_POSTS = 'REQUEST_POSTS'
