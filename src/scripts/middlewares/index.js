@@ -6,14 +6,14 @@ import {REQUEST_POSTS} from "../actions/posts";
 import {RECEIVE_POSTS} from "../actions/posts";
 import {fetchPosts} from "../actions/posts";
 import {DO_LOGGIN} from "../actions/login";
+import {saveState} from "../api/localStorage";
 
 export const login = store => next => action => {
-
 	if (action.type != DO_LOGGIN) {
 			return next(action);
 	}
-
 	if (action.type == DO_LOGGIN) {
+
 		let {username, password} = action;
 		let wp = new WP({
 			endpoint: 'http://vccw.loc/wp-json',
@@ -26,6 +26,11 @@ export const login = store => next => action => {
 
 			let result = next(Object.assign({}, action, { type: LOGGED_IN,loggedIn: true, error: false}));
 			store.dispatch(fetchPosts())
+
+			saveState({
+				auth: store.getState().auth
+			})
+
 			return result;
 
 		}).catch((err) => {
