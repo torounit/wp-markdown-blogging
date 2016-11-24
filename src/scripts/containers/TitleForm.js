@@ -24,7 +24,7 @@ class TitleForm extends React.Component {
 					style={{
 						fontSize: '2em',
 						width: '100%',
-						padding: '0 16px',
+						padding: '4px 16px',
 						outline: 'none'
 					}}
 				/>
