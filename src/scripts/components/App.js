@@ -47,20 +47,21 @@ const App = () => (
 					flex: '1 1 auto',
 					borderWidth: '1px 0',
 					borderStyle: 'solid',
-					borderColor: '#ccc',
-					overflow: 'scroll'
+					borderColor: '#ccc'
 				}}>
 				<div style={{
 					width: '50%',
 					background: '#f5f5f5',
-					padding: '16px'
+					padding: '16px',
+					overflow: 'scroll'
 				}}>
 					<PostForm />
 				</div>
 				<div style={{
 					width: '50%',
 					background: '#fff',
-					padding: '16px'
+					padding: '16px',
+					overflow: 'scroll'
 				}}>
 					<PostPreview />
 				</div>
