@@ -3,7 +3,6 @@ import {ADD_POST, EDIT_POST} from '../actions/post';
 
 
 const post = (state = {}, action) => {
-	"use strict";
 	switch (action.type) {
 
 		default:
